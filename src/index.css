@@ -1,0 +1,93 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Outfit Variable", system-ui, -apple-system, sans-serif;
+
+  --color-ink: #171a21;
+  --color-body: #4b5160;
+  --color-faint: #5f6572;
+  --color-cobalt: #2244d6;
+  --color-cobalt-deep: #1b37af;
+  --color-cream: #f7f5ef;
+  --color-cream-dim: #efece3;
+  --color-line: #e2ded2;
+  --color-line-strong: #8b8574;
+  --color-danger: #b3261e;
+
+  --ease-snap: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+body {
+  @apply bg-cream text-ink font-sans antialiased;
+}
+
+::selection {
+  @apply bg-cobalt text-white;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-cobalt);
+  outline-offset: 2px;
+}
+
+@layer components {
+  .container-site {
+    @apply mx-auto w-full max-w-[1200px] px-5 md:px-8;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full font-medium whitespace-nowrap select-none px-6 py-3 text-[15px];
+    transition:
+      transform 150ms var(--ease-snap),
+      background-color 150ms ease,
+      color 150ms ease,
+      border-color 150ms ease;
+  }
+  .btn:active {
+    transform: scale(0.97);
+  }
+  .btn-sm {
+    @apply px-5 py-2.5 text-sm;
+  }
+
+  .btn-primary {
+    @apply bg-cobalt text-white;
+  }
+  .btn-secondary {
+    @apply border border-line-strong bg-white text-ink;
+  }
+  .btn-inverse {
+    @apply bg-white text-cobalt;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .btn-primary:hover {
+      @apply bg-cobalt-deep;
+    }
+    .btn-secondary:hover {
+      @apply border-ink/60;
+    }
+    .btn-inverse:hover {
+      @apply bg-cream;
+    }
+  }
+
+  .field-input {
+    @apply w-full rounded-lg border border-line-strong bg-white px-3.5 py-2.5 text-[15px] text-ink;
+    transition: border-color 150ms ease, box-shadow 150ms ease;
+  }
+  .field-input:focus {
+    @apply border-cobalt outline-none;
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--color-cobalt) 30%, transparent);
+  }
+  .field-input[aria-invalid="true"] {
+    @apply border-danger;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:active {
+    transform: none;
+    filter: brightness(0.92);
+  }
+}
