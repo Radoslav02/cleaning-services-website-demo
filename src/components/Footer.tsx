@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { Clock, EnvelopeSimple, MapPin, Phone } from '@phosphor-icons/react'
 import { useLang } from '../i18n/LanguageContext'
 import { CONTACT } from '../i18n/translations'
+import Logo from './Logo'
 
 export default function Footer() {
   const { t } = useLang()
@@ -10,15 +11,7 @@ export default function Footer() {
     <footer className="border-t border-line bg-white">
       <div className="container-site grid gap-10 py-14 md:grid-cols-[1.4fr_1fr_1fr_1.2fr]">
         <div>
-          <div className="flex items-center gap-2.5">
-            <span
-              aria-hidden="true"
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-cobalt text-[15px] font-semibold text-white"
-            >
-              R
-            </span>
-            <span className="text-[17px] font-semibold tracking-tight">Revive Interiors</span>
-          </div>
+          <Logo />
           <p className="mt-4 max-w-[36ch] text-[15px] leading-relaxed text-body">{t.footer.blurb}</p>
         </div>
 
@@ -76,6 +69,16 @@ export default function Footer() {
           <p>{t.footer.legal}</p>
           <p>{t.footer.badges}</p>
         </div>
+        <p className="container-site pb-5 text-[12px] text-faint">
+          <a
+            href="https://www.pexels.com/license/"
+            target="_blank"
+            rel="noreferrer"
+            className="underline underline-offset-2 hover:text-body"
+          >
+            {t.footer.photoCredits}
+          </a>
+        </p>
       </div>
     </footer>
   )

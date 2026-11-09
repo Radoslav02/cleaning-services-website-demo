@@ -50,7 +50,7 @@ export default function StickyCompareStack({ cards }: Props) {
       {cards.map((card, i) => (
         <div
           key={i}
-          className="stack-card py-4 md:sticky md:top-[68px] md:flex md:min-h-[calc(100dvh-68px)] md:items-center md:py-0"
+          className="stack-card py-4 md:sticky md:top-[68px] md:flex md:min-h-[calc(100dvh-68px)] md:items-start md:pb-0 md:pt-6"
         >
           {card}
         </div>

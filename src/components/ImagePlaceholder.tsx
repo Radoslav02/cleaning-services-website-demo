@@ -7,14 +7,42 @@ type Props = {
   /** CSS aspect-ratio, e.g. "4/3", "1/1", "16/9" */
   ratio?: string
   className?: string
+  /** Real photo. When set, it fills the same frame (object-cover) and the label becomes its alt text. */
+  src?: string
+  /** Load eagerly with high priority (above-the-fold images only). */
+  priority?: boolean
 }
 
 /**
  * Framed slot for a future photo. The frame, ratio badge, and description make it
  * obvious how the real image will sit in the layout once it is dropped in.
  */
-export default function ImagePlaceholder({ label, ratio = '4/3', className = '' }: Props) {
+export default function ImagePlaceholder({
+  label,
+  ratio = '4/3',
+  className = '',
+  src,
+  priority = false,
+}: Props) {
   const { t } = useLang()
+
+  if (src) {
+    return (
+      <figure
+        className={`relative isolate w-full overflow-hidden rounded-2xl border border-line bg-cream-dim ${className}`}
+        style={{ aspectRatio: ratio }}
+      >
+        <img
+          src={src}
+          alt={label}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
+          decoding="async"
+          className="absolute inset-0 h-full w-full object-cover"
+        />
+      </figure>
+    )
+  }
 
   return (
     <figure

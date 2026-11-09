@@ -5,17 +5,12 @@ import { List, X } from '@phosphor-icons/react'
 import { EASE } from '../lib/motion'
 import { useLang } from '../i18n/LanguageContext'
 import LangSwitcher from './LangSwitcher'
+import BrandLogo from './Logo'
 
 function Logo({ label }: { label: string }) {
   return (
-    <Link to="/" className="flex items-center gap-2.5" aria-label={label}>
-      <span
-        aria-hidden="true"
-        className="flex h-8 w-8 items-center justify-center rounded-full bg-cobalt text-[15px] font-semibold text-white"
-      >
-        R
-      </span>
-      <span className="text-[17px] font-semibold tracking-tight">Revive Interiors</span>
+    <Link to="/" aria-label={label} className="rounded-xl">
+      <BrandLogo />
     </Link>
   )
 }
@@ -58,9 +53,6 @@ export default function Header() {
 
         <div className="hidden items-center gap-3 lg:flex">
           <LangSwitcher />
-          <Link to="/contact" className="btn btn-primary btn-sm">
-            {t.common.ctaQuote}
-          </Link>
         </div>
 
         <button
@@ -108,9 +100,6 @@ export default function Header() {
               ))}
               <div className="mt-3 flex items-center gap-3">
                 <LangSwitcher />
-                <Link to="/contact" onClick={() => setOpen(false)} className="btn btn-primary btn-sm">
-                  {t.common.ctaQuote}
-                </Link>
               </div>
             </div>
           </motion.nav>

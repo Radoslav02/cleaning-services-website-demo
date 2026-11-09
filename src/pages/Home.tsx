@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { motion, useReducedMotion } from 'motion/react'
 import { ArrowRight, Armchair, CarProfile, CheckCircle } from '@phosphor-icons/react'
 import ImagePlaceholder from '../components/ImagePlaceholder'
+import { PHOTOS } from '../assets/photos'
 import Reveal from '../components/Reveal'
 import CtaBand from '../components/CtaBand'
 import { pageEnter } from '../lib/motion'
@@ -47,6 +48,8 @@ function Hero() {
         <motion.div {...enter(2)}>
           <ImagePlaceholder
             label={t.home.heroPlaceholder}
+            src={PHOTOS.hero}
+            priority
             ratio="4/5"
             className="max-w-[440px] lg:ml-auto"
           />
@@ -77,7 +80,12 @@ function Services() {
             return (
               <Reveal key={title} delay={i * 0.06}>
                 <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-line bg-white">
-                  <ImagePlaceholder label={placeholder} ratio="16/9" className="rounded-none border-0" />
+                  <ImagePlaceholder
+                    label={placeholder}
+                    src={PHOTOS.services[i]}
+                    ratio="16/9"
+                    className="rounded-none border-0"
+                  />
                   <div className="flex flex-1 flex-col p-6 md:p-7">
                     <div className="flex items-center gap-3">
                       <Icon size={26} className="text-cobalt" aria-hidden="true" />
@@ -155,10 +163,10 @@ function BeforeAfter() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2">
           <Reveal>
-            <ImagePlaceholder label={t.home.beforeLabel} ratio="4/3" />
+            <ImagePlaceholder label={t.home.beforeLabel} src={PHOTOS.homeBefore} ratio="4/3" />
           </Reveal>
           <Reveal delay={0.06}>
-            <ImagePlaceholder label={t.home.afterLabel} ratio="4/3" />
+            <ImagePlaceholder label={t.home.afterLabel} src={PHOTOS.homeAfter} ratio="4/3" />
           </Reveal>
         </div>
       </div>

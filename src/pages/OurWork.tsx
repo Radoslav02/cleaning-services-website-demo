@@ -6,25 +6,26 @@ import StickyCompareStack from '../components/StickyCompareStack'
 import { pageEnter } from '../lib/motion'
 import { useLang } from '../i18n/LanguageContext'
 import type { Dict } from '../i18n/translations'
+import { PHOTOS } from '../assets/photos'
 
 type Job = Dict['work']['carJobs'][number]
 
 /** Full-width before/after card used inside the scroll-pinned stack. */
-function CompareCard({ job }: { job: Job }) {
+function CompareCard({ job, photos }: { job: Job; photos: readonly [string, string] }) {
   return (
     <article className="w-full rounded-2xl border border-line bg-white p-5 shadow-[0_24px_60px_-32px_rgba(23,26,33,0.35)] md:p-8">
       <h3 className="text-xl font-semibold tracking-tight md:text-2xl">{job.title}</h3>
       <p className="mt-1.5 max-w-[70ch] text-[15px] leading-relaxed text-body">{job.detail}</p>
       <div className="mt-5 grid gap-4 sm:grid-cols-2">
-        <ImagePlaceholder label={job.before} ratio="4/3" />
-        <ImagePlaceholder label={job.after} ratio="4/3" />
+        <ImagePlaceholder label={job.before} src={photos[0]} ratio="4/3" />
+        <ImagePlaceholder label={job.after} src={photos[1]} ratio="4/3" />
       </div>
     </article>
   )
 }
 
 /** Row layout: text column beside the photo pair, divided rows. Used for the home section. */
-function JobRow({ job }: { job: Job }) {
+function JobRow({ job, photos }: { job: Job; photos: readonly [string, string] }) {
   return (
     <Reveal>
       <article className="grid gap-5 border-t border-line py-8 md:grid-cols-[1fr_1.6fr] md:items-center md:gap-10">
@@ -33,8 +34,8 @@ function JobRow({ job }: { job: Job }) {
           <p className="mt-2 text-[15px] leading-relaxed text-body">{job.detail}</p>
         </div>
         <div className="grid gap-4 sm:grid-cols-2">
-          <ImagePlaceholder label={job.before} ratio="3/2" />
-          <ImagePlaceholder label={job.after} ratio="3/2" />
+          <ImagePlaceholder label={job.before} src={photos[0]} ratio="3/2" />
+          <ImagePlaceholder label={job.after} src={photos[1]} ratio="3/2" />
         </div>
       </article>
     </Reveal>
@@ -73,8 +74,8 @@ export default function OurWork() {
           </Reveal>
           <div className="mt-8 md:mt-4">
             <StickyCompareStack
-              cards={t.work.carJobs.map((job) => (
-                <CompareCard key={job.title} job={job} />
+              cards={t.work.carJobs.map((job, i) => (
+                <CompareCard key={job.title} job={job} photos={PHOTOS.carJobs[i]} />
               ))}
             />
           </div>
@@ -89,8 +90,8 @@ export default function OurWork() {
             </h2>
           </Reveal>
           <div className="mt-8">
-            {t.work.homeJobs.map((job) => (
-              <JobRow key={job.title} job={job} />
+            {t.work.homeJobs.map((job, i) => (
+              <JobRow key={job.title} job={job} photos={PHOTOS.homeJobs[i]} />
             ))}
           </div>
         </div>
